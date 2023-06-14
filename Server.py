@@ -31,7 +31,6 @@ def client_thread(connection):
         test = connection.recv(1024).decode()
         # print(test,"++++")
         data, public_key = (test).split(',') #4 Get Vote
-        
 
         print("Vote Received from ID: "+str(log[0])+"  Processing...")
         lock.acquire()
@@ -41,7 +40,7 @@ def client_thread(connection):
         if(df.vote_update(data,log[0])):
             print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
             connection.send("Successful".encode())
-            df.update_public(str(log[0]), public_key, RSA.encrypt_message(public_key, data))
+            df.update_public(str(log[0]), public_key, RSA.encrypt_and_convert_to_base64(RSA.base64.b64decode(public_key), data))
 
         else:
             print("Vote Update Failed by voter ID = "+str(log[0]))

@@ -13,9 +13,9 @@ def voteCast(root,frame1,vote,client_socket):
     
     private_key, public_key = RSA.generate_rsa_key_pair()
     # vote = RSACrypto.encrypt_message(public_key, vote)
-    votekey = vote + ',' + public_key.decode()
+    votekey = vote + ',' + RSA.convert_to_base64(public_key)
     client_socket.send(votekey.encode()) #4
-    print(f"Your private key: {private_key.decode()}")
+    print(f"Your private key: {RSA.convert_to_base64(private_key)}")
 
     # end modified 
 
