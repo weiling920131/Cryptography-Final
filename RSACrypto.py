@@ -23,14 +23,3 @@ def decrypt_message(private_key, encrypted_message):
     decrypted_message = cipher.decrypt(encrypted_message)
     return decrypted_message.decode()
 
-# 範例使用
-# private_key, public_key = generate_rsa_key_pair()
-# print("Private Key: ", private_key)
-# print("Public Key: ",public_key)
-# message = "Hello, World!"
-
-# encrypted_message = encrypt_message(public_key, message)
-# print("加密後的訊息:", encrypted_message)
-
-# decrypted_message = decrypt_message(private_key, encrypted_message)
-# print("解密後的訊息:", decrypted_message)

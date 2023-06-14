@@ -2,7 +2,7 @@ import tkinter as tk
 import socket
 from tkinter import *
 from VotingPage import votingPg
-import RSACrypto
+import RSACrypto as RSA
 import dframe as df
 
 def establish_connection():
@@ -18,7 +18,7 @@ def establish_connection():
         return 'Failed'
 
 
-def failed_return(root,frame1,client_socket,message, voter_id = 10001):
+def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     for widget in frame1.winfo_children():
         widget.destroy()
     message = message + "... \nTry again..."
@@ -27,10 +27,10 @@ def failed_return(root,frame1,client_socket,message, voter_id = 10001):
     # start modified
 
     if message == "Vote has Already been Cast":
-        Label(frame1, text="Enter your private key:           ", anchor="e", justify=LEFT).grid(row = 3,column = 0)
+        Label(frame1, text="To check your voting\nplease enter your private key:           ", anchor="e", justify=LEFT).grid(row = 3,column = 0)
         private_key = tk.StringVar()
-        e2 = Entry(frame1, textvariable = private_key).grid(row = 3, column = 2)
-        Label(frame1, text="Vote:  " + RSACrypto.decrypt_message(private_key.get(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 4,column = 0)
+        e2 = Entry(frame1, textvariable = private_key).grid(row = 4, column = 2)
+        Label(frame1, text="Vote:  " + RSA.decrypt_message(private_key.get(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 5,column = 0)
 
     # end modified
 

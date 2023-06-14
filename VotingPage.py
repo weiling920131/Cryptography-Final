@@ -2,7 +2,7 @@ import tkinter as tk
 import socket
 from tkinter import *
 from PIL import ImageTk,Image
-import RSACrypto
+import RSACrypto as RSA
 
 def voteCast(root,frame1,vote,client_socket):
     print(type(frame1), frame1, "---------------")
@@ -11,11 +11,11 @@ def voteCast(root,frame1,vote,client_socket):
 
     # start modified 
     
-    private_key, public_key = RSACrypto.generate_rsa_key_pair()
+    private_key, public_key = RSA.generate_rsa_key_pair()
     # vote = RSACrypto.encrypt_message(public_key, vote)
     votekey = vote + ' ' + public_key
     client_socket.send(votekey.encode()) #4
-    print(private_key)
+    print(f"Your private key: {private_key}")
 
     # end modified 
 

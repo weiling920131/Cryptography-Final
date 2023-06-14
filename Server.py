@@ -3,7 +3,7 @@ import threading
 import dframe as df
 from threading import Thread
 from dframe import *
-import RSACrypto
+import RSACrypto as RSA
 
 lock = threading.Lock()
 
@@ -28,8 +28,7 @@ def client_thread(connection):
 
     # modified start
 
-    votekey = connection.recv(1024).decode()
-    data, public_key = votekey.split(' ')                                    #4 Get Vote
+    data, public_key = connection.recv(1024).decode().split(' ') #4 Get Vote
     
 
     print("Vote Received from ID: "+str(log[0])+"  Processing...")
@@ -40,7 +39,7 @@ def client_thread(connection):
     if(df.vote_update(data,log[0])):
         print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
         connection.send("Successful".encode())
-        df.update_public(str(log[0]), public_key, RSACrypto.encrypt_message(public_key, data))
+        df.update_public(str(log[0]), public_key, RSA.encrypt_message(public_key, data))
 
     else:
         print("Vote Update Failed by voter ID = "+str(log[0]))
