@@ -20,6 +20,15 @@ def encrypt_message(public_key, message):
 def decrypt_message(private_key, encrypted_message):
     key = RSA.import_key(private_key)
     cipher = PKCS1_OAEP.new(key)
-    decrypted_message = cipher.decrypt(encrypted_message)
+    # print(encrypted_message[2:len(encrypted_message)-1], '++++++++++++++++++++++++++++++++++++++')
+    decrypted_message = cipher.decrypt(encrypted_message)#[2:len(encrypted_message)-1])
     return decrypted_message.decode()
+
+if __name__ == '__main__':
+    private, public = generate_rsa_key_pair()
+    print(type(private), private)
+    print(type(public), public)
+    message = 'fffffff'
+    print(type(encrypt_message(public, message)), encrypt_message(public, message))
+    print(type(decrypt_message(private, encrypt_message(public, message))), decrypt_message(private, encrypt_message(public, message)))
 

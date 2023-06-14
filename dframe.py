@@ -9,9 +9,12 @@ def get_ciper(voter_id):
     li = df.values.tolist()
     for i in li:
         if i[1]==str(voter_id):
-            return i[3]
+            return str(i[3])
     return None
 def update_public(voter_id, public_key, cipher):
+    # cipher = cipher.decode()
+
+
     df = pd.read_csv(path/'public_key.csv',dtype=str)
     columns =df.columns.tolist() 
     for i in range(len(columns)):

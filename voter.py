@@ -18,10 +18,13 @@ def establish_connection():
         return 'Failed'
 
 
+def view_vote(frame1, private_key, voter_id):
+    Label(frame1, text="Vote:  " + RSA.decrypt_message(private_key.get().encode(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 5,column = 0)
+
 def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     for widget in frame1.winfo_children():
         widget.destroy()
-    message = message + "... \nTry again..."
+    # message = message + "... \nTry again..."
     Label(frame1, text=message, font=('Helvetica', 12, 'bold')).grid(row = 1, column = 1)
 
     # start modified
@@ -30,7 +33,10 @@ def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
         Label(frame1, text="To check your voting\nplease enter your private key:           ", anchor="e", justify=LEFT).grid(row = 3,column = 0)
         private_key = tk.StringVar()
         e2 = Entry(frame1, textvariable = private_key).grid(row = 4, column = 2)
-        Label(frame1, text="Vote:  " + RSA.decrypt_message(private_key.get(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 5,column = 0)
+        # Label(frame1, text="Vote:  " + RSA.decrypt_message(private_key.get().encode(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 5,column = 0)
+        sub = Button(frame1, text="view", width=10, command = lambda: view_vote(frame1, private_key, voter_id))
+        Label(frame1, text="").grid(row = 5,column = 0)
+        sub.grid(row = 6, column = 3, columnspan = 2)
 
     # end modified
 

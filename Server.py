@@ -27,27 +27,31 @@ def client_thread(connection):
 
 
     # modified start
+    try:
+        test = connection.recv(1024).decode()
+        # print(test,"++++")
+        data, public_key = (test).split(',') #4 Get Vote
+        
 
-    data, public_key = connection.recv(1024).decode().split(' ') #4 Get Vote
-    
+        print("Vote Received from ID: "+str(log[0])+"  Processing...")
+        lock.acquire()
 
-    print("Vote Received from ID: "+str(log[0])+"  Processing...")
-    lock.acquire()
+        #update Database
+        # data = RSACrypto.decrypt_message()                                     
+        if(df.vote_update(data,log[0])):
+            print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
+            connection.send("Successful".encode())
+            df.update_public(str(log[0]), public_key, RSA.encrypt_message(public_key, data))
 
-    #update Database
-    # data = RSACrypto.decrypt_message()                                     
-    if(df.vote_update(data,log[0])):
-        print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
-        connection.send("Successful".encode())
-        df.update_public(str(log[0]), public_key, RSA.encrypt_message(public_key, data))
+        else:
+            print("Vote Update Failed by voter ID = "+str(log[0]))
+            connection.send("Vote Update Failed".encode())
+                                                                            #5
+        # modified end
 
-    else:
-        print("Vote Update Failed by voter ID = "+str(log[0]))
-        connection.send("Vote Update Failed".encode())
-                                                                        #5
-    # modified end
-
-    lock.release()
+        lock.release()
+    except:
+        print("")
     connection.close()
 
 
