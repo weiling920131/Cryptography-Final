@@ -44,24 +44,24 @@ def votingPg(root,frame1,client_socket):
 
     vote = StringVar(frame1,"-1")
 
-    Radiobutton(frame1, text = "BJP\n\nNarendra Modi", variable = vote, value = "bjp", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"bjp",client_socket)).grid(row = 2,column = 1)
-    bjpLogo = ImageTk.PhotoImage((Image.open("img/bjp.png")).resize((45,45),Image.ANTIALIAS))
+    Radiobutton(frame1, text = "whp1230\n\n資工14系排大砲", variable = vote, value = "bjp", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"bjp",client_socket)).grid(row = 2,column = 1)
+    bjpLogo = ImageTk.PhotoImage((Image.open("img/0.png")).resize((70,70),Image.ANTIALIAS))
     bjpImg = Label(frame1, image=bjpLogo).grid(row = 2,column = 0)
 
-    Radiobutton(frame1, text = "Congress\n\nRahul Gandhi", variable = vote, value = "cong", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"cong",client_socket)).grid(row = 3,column = 1)
-    congLogo = ImageTk.PhotoImage((Image.open("img/cong.jpg")).resize((35,48),Image.ANTIALIAS))
+    Radiobutton(frame1, text = "jox__sid\n\nGPE戰神", variable = vote, value = "cong", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"cong",client_socket)).grid(row = 3,column = 1)
+    congLogo = ImageTk.PhotoImage((Image.open("img/1.png")).resize((70,70),Image.ANTIALIAS))
     congImg = Label(frame1, image=congLogo).grid(row = 3,column = 0)
 
-    Radiobutton(frame1, text = "Aam Aadmi Party\n\nArvind Kejriwal", variable = vote, value = "aap", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"aap",client_socket) ).grid(row = 4,column = 1)
-    aapLogo = ImageTk.PhotoImage((Image.open("img/aap.png")).resize((55,40),Image.ANTIALIAS))
+    Radiobutton(frame1, text = "r14.07p\n\n大推網通原", variable = vote, value = "aap", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"aap",client_socket) ).grid(row = 4,column = 1)
+    aapLogo = ImageTk.PhotoImage((Image.open("img/2.png")).resize((70,70),Image.ANTIALIAS))
     aapImg = Label(frame1, image=aapLogo).grid(row = 4,column = 0)
 
-    Radiobutton(frame1, text = "Shiv Sena\n\nUdhav Thakrey", variable = vote, value = "ss", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"ss",client_socket)).grid(row = 5,column = 1)
-    ssLogo = ImageTk.PhotoImage((Image.open("img/ss.png")).resize((50,45),Image.ANTIALIAS))
+    Radiobutton(frame1, text = "weiling_0131\n\n頭髮 會長 出來啦", variable = vote, value = "ss", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"ss",client_socket)).grid(row = 5,column = 1)
+    ssLogo = ImageTk.PhotoImage((Image.open("img/3.png")).resize((70,70),Image.ANTIALIAS))
     ssImg = Label(frame1, image=ssLogo).grid(row = 5,column = 0)
 
-    Radiobutton(frame1, text = "\nNOTA    \n  ", variable = vote, value = "nota", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"nota",client_socket)).grid(row = 6,column = 1)
-    notaLogo = ImageTk.PhotoImage((Image.open("img/nota.jpg")).resize((45,35),Image.ANTIALIAS))
+    Radiobutton(frame1, text = "rueixsun\n\n6/16來看熱舞大成", variable = vote, value = "nota", indicator = 0, height = 4, width=15, command = lambda: voteCast(root,frame1,"nota",client_socket)).grid(row = 6,column = 1)
+    notaLogo = ImageTk.PhotoImage((Image.open("img/4.png")).resize((70,70),Image.ANTIALIAS))
     notaImg = Label(frame1, image=notaLogo).grid(row = 6,column = 0)
 
     frame1.pack()

@@ -25,18 +25,18 @@ def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     for widget in frame1.winfo_children():
         widget.destroy()
     # message = message + "... \nTry again..."
-    Label(frame1, text=message, font=('Helvetica', 12, 'bold')).grid(row = 1, column = 1)
+    Label(frame1, text=message, font=('Helvetica', 12, 'bold')).grid(row = 1, column = 0, columnspan = 2, padx=120, pady=10)
 
     # start modified
 
-    if message == "Vote has Already been Cast":
-        Label(frame1, text="To check your voting\nplease enter your private key:           ", anchor="e", justify=LEFT).grid(row = 3,column = 0)
+    if message == "Vote has already been cast":
+        Label(frame1, text="To check your voting,\nplease enter your private key:").grid(row = 3,column = 0, sticky=W+E)
         private_key = tk.StringVar()
-        e2 = Entry(frame1, textvariable = private_key).grid(row = 4, column = 2)
+        e2 = Entry(frame1, textvariable = private_key, width=30).grid(row = 3, column = 1, sticky=W)
         # Label(frame1, text="Vote:  " + RSA.decrypt_message(private_key.get().encode(), df.get_ciper(voter_id)), anchor="e", justify=LEFT).grid(row = 5,column = 0)
         sub = Button(frame1, text="view", width=10, command = lambda: view_vote(frame1, private_key, voter_id))
-        Label(frame1, text="").grid(row = 5,column = 0)
-        sub.grid(row = 6, column = 3, columnspan = 2)
+        # Label(frame1, text="").grid(row = 4,column = 0)
+        sub.grid(row = 4, column = 0, columnspan = 2, pady=10)
 
     # end modified
 
@@ -53,7 +53,7 @@ def log_server(root,frame1,client_socket,voter_ID,password):
         votingPg(root, frame1, client_socket)
 
     elif(message=="VoteCasted"):
-        message = "Vote has Already been Cast"
+        message = "Vote has already been cast"
         failed_return(root,frame1,client_socket,message,voter_ID)
 
     elif(message=="InvalidVoter"):
