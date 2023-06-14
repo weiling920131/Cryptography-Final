@@ -1,7 +1,6 @@
 import pandas as pd
 from pathlib import Path
 
-# path = Path("C:/Users/Desktop/Sem-5/CS301 CN/Project/Voting/database")
 path = Path("database")
 
 def count_reset():

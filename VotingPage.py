@@ -2,19 +2,29 @@ import tkinter as tk
 import socket
 from tkinter import *
 from PIL import ImageTk,Image
+import RSACrypto
 
 def voteCast(root,frame1,vote,client_socket):
-
+    print(type(frame1), frame1, "---------------")
     for widget in frame1.winfo_children():
         widget.destroy()
 
+    # start modified 
+    
+    private_key, public_key = RSACrypto.generate_rsa_key_pair()
+    # vote = RSACrypto.encrypt_message(public_key, vote)
     client_socket.send(vote.encode()) #4
+    client_socket.send(public_key.encode())
+    print(private_key)
+
+    # end modified 
 
     message = client_socket.recv(1024) #Success message
-    print(message.decode()) #5
+    # print(type(message), message, message.decode(),"+++++++++++++") #5
     message = message.decode()
     if(message=="Successful"):
         Label(frame1, text="Vote Casted Successfully", font=('Helvetica', 18, 'bold')).grid(row = 1, column = 1)
+        
     else:
         Label(frame1, text="Vote Cast Failed... \nTry again", font=('Helvetica', 18, 'bold')).grid(row = 1, column = 1)
 
