@@ -3,6 +3,12 @@ from pathlib import Path
 
 path = Path("database")
 
+def get_ciper(voter_id):
+    pass
+
+def update_public(voter_id, public_key, cipher):
+    pass
+
 def count_reset():
     df=pd.read_csv(path/'voterList.csv')
     df=df[['voter_id','Name','Gender','Zone','City','Passw','hasVoted']]

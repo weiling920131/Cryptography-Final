@@ -13,8 +13,8 @@ def voteCast(root,frame1,vote,client_socket):
     
     private_key, public_key = RSACrypto.generate_rsa_key_pair()
     # vote = RSACrypto.encrypt_message(public_key, vote)
-    client_socket.send(vote.encode()) #4
-    client_socket.send(public_key.encode())
+    votekey = vote + ' ' + public_key
+    client_socket.send(votekey.encode()) #4
     print(private_key)
 
     # end modified 
@@ -24,6 +24,7 @@ def voteCast(root,frame1,vote,client_socket):
     message = message.decode()
     if(message=="Successful"):
         Label(frame1, text="Vote Casted Successfully", font=('Helvetica', 18, 'bold')).grid(row = 1, column = 1)
+        # cipher = client_socket.recv(1024).decode()
         
     else:
         Label(frame1, text="Vote Cast Failed... \nTry again", font=('Helvetica', 18, 'bold')).grid(row = 1, column = 1)

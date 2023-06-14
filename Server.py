@@ -28,19 +28,20 @@ def client_thread(connection):
 
     # modified start
 
-    data = connection.recv(1024).decode()                                    #4 Get Vote
-    public_key = connection.recv(1024).decode()
-    # print(data, type(data), data.decode(), "++++++++++++++")
+    votekey = connection.recv(1024).decode()
+    data, public_key = votekey.split(' ')                                    #4 Get Vote
+    
 
     print("Vote Received from ID: "+str(log[0])+"  Processing...")
     lock.acquire()
 
     #update Database
-    # data = RSACrypto.decrypt_message()                                     # pubilc_key
+    # data = RSACrypto.decrypt_message()                                     
     if(df.vote_update(data,log[0])):
         print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
         connection.send("Successful".encode())
-        connection.send()
+        df.update_public(str(log[0]), public_key, RSACrypto.encrypt_message(public_key, data))
+
     else:
         print("Vote Update Failed by voter ID = "+str(log[0]))
         connection.send("Vote Update Failed".encode())
