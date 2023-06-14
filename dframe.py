@@ -14,9 +14,6 @@ def get_ciper(voter_id):
             return str(i[3])
     return None
 def update_public(voter_id, public_key, cipher):
-    # cipher = cipher.decode()
-    print(cipher)
-    print(str(cipher))
 
     df = pd.read_csv(path/'public_key.csv',dtype=str)
     columns =df.columns.tolist() 
@@ -28,14 +25,12 @@ def update_public(voter_id, public_key, cipher):
     for i in li:
         if i[1] == str(voter_id):
             i[2] = str(public_key)
-            i[3] = cipher#str(cipher,'UTF-8')
+            i[3] = cipher
             flag =False
-    print(public_key,'++++++++++++++++++++++++++++++')
     if(flag):
-        li.append([str(len(li)),str(voter_id),str(public_key),cipher])#str(cipher,'UTF-8')])
+        li.append([str(len(li)),str(voter_id),str(public_key),cipher])#
     store = pd.DataFrame(columns = columns,data = li)
-    print(li)
-    print(store)
+    
     with open(path/'public_key.csv','w') as f:
         csv_writer  = csv.writer(f)
         csv_writer.writerow(columns)
