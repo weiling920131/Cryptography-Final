@@ -4,10 +4,31 @@ from pathlib import Path
 path = Path("database")
 
 def get_ciper(voter_id):
-    pass
-
+    df = pd.read_csv(path/'public_key.csv',dtype=str)
+    #print(df)
+    li = df.values.tolist()
+    for i in li:
+        if i[1]==str(voter_id):
+            return i[3]
+    return None
 def update_public(voter_id, public_key, cipher):
-    pass
+    df = pd.read_csv(path/'public_key.csv',dtype=str)
+    columns =df.columns.tolist() 
+    for i in range(len(columns)):
+        if columns[i][:9] =="Unnamed: ":
+            columns[i]=""
+    li = df.values.tolist()
+    flag = True
+    for i in li:
+        if i[1] == str(voter_id):
+            i[2] = str(public_key)
+            i[3] = cipher
+            flag =False
+    if(flag):
+        li.append([str(len(li)),str(voter_id),str(public_key),str(cipher)])
+    store = pd.DataFrame(columns = columns,data = li)
+    store.to_csv(path/'public_key.csv',encoding='utf-8',index = False)
+    return
 
 def count_reset():
     df=pd.read_csv(path/'voterList.csv')
