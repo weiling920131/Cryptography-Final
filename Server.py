@@ -8,9 +8,7 @@ import RSACrypto as RSA
 lock = threading.Lock()
 
 def client_thread(connection):
-
     data = connection.recv(1024)     #receiving voter details            #2
-
     #verify voter details
     log = (data.decode()).split(' ')
     log[0] = int(log[0])
@@ -25,18 +23,15 @@ def client_thread(connection):
         print('Invalid Voter')
         connection.send("InvalidVoter".encode())
 
-
     # modified start
     try:
         test = connection.recv(1024).decode()
-        # print(test,"++++")
         data, public_key = (test).split(',') #4 Get Vote
 
         print("Vote Received from ID: "+str(log[0])+"  Processing...")
         lock.acquire()
 
-        #update Database
-        # data = RSACrypto.decrypt_message()                                     
+        #update Database                                   
         if(df.vote_update(data,log[0])):
             print("Vote Casted Sucessfully by voter ID = "+str(log[0]))
             connection.send("Successful".encode())

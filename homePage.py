@@ -17,9 +17,9 @@ def Home(root, frame1, frame2):
     Label(frame2, text="         ").grid(row = 1,column = 1)
     frame2.pack(side=TOP)
 
-    root.title("Home")
+    root.title("Online Voting System")
 
-    Label(frame1, text="Home", font=('Helvetica', 25, 'bold')).grid(row = 0, column = 1, rowspan=1)
+    Label(frame1, text="Online Voting System", font=('Helvetica', 25, 'bold')).grid(row = 0, column = 1, rowspan=1)
     Label(frame1, text="").grid(row = 1,column = 0)
     #Admin Login
     admin = Button(frame1, text="Admin Login", width=15, command = lambda: AdmLogin(root, frame1))
