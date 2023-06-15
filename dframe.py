@@ -15,7 +15,6 @@ def show_img(cand_sign):
 
 def get_ciper(voter_id):
     df = pd.read_csv(path/'public_key.csv',dtype=str)
-    #print(df)
     li = df.values.tolist()
     for i in li:
         if i[1]==str(voter_id):
