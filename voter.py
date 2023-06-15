@@ -2,6 +2,7 @@ import tkinter as tk
 import socket
 from tkinter import *
 from VotingPage import votingPg
+from PIL import ImageTk,Image
 import RSACrypto as RSA
 import dframe as df
 
@@ -18,11 +19,20 @@ def establish_connection():
         return 'Failed'
 
 
-def view_vote(frame1, private_key, voter_id):
+def view_vote(frame1, private_key, voter_id, vm, vote_img):
+    global vimg
     try:
-        Label(frame1, text="Vote:  " + RSA.decrypt_message(RSA.base64.b64decode(private_key), RSA.base64.b64decode(df.get_ciper(voter_id))), anchor="e", justify=LEFT).grid(row = 5,column = 0)
+        vote_sign = RSA.decrypt_message(RSA.base64.b64decode(private_key), RSA.base64.b64decode(df.get_ciper(voter_id)))
+        vote_message = "Vote:  " + vote_sign
+        vimg = ImageTk.PhotoImage((Image.open(f"img/{df.show_img(vote_sign)}.png")).resize((200,200),Image.ANTIALIAS))
+        vote_img.config(image=vimg)
+        
     except:
-        Label(frame1, text="Your private key is incorrect", anchor="e", justify=LEFT).grid(row = 5,column = 0)
+        vote_message = "Your private key is incorrect"
+        vote_img.config(image='')
+
+    vm.config(text=vote_message)
+    
         
 def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     for widget in frame1.winfo_children():
@@ -33,12 +43,21 @@ def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     # start modified
 
     if message == "Vote has already been cast":
-        Label(frame1, text="To check your voting,\nplease enter your private key:").grid(row = 3,column = 0, sticky=W+E)
+        Label(frame1, text="To check your voting,\nplease enter your private key:", justify=LEFT).grid(row = 3,column = 0, sticky=W+E)
         private_key = tk.StringVar()
-        e2 = Entry(frame1, textvariable = private_key, width=30).grid(row = 3, column = 1, sticky=W)
-        sub = Button(frame1, text="view", width=10, command = lambda: view_vote(frame1, private_key.get(), voter_id))
-        sub.grid(row = 4, column = 0, columnspan = 2, pady=10)
 
+        e2 = Entry(frame1, textvariable = private_key, width=30)
+        e2.grid(row = 3, column = 1, sticky=W)
+
+        vm = Label(frame1)
+        vm.grid(row = 5,column = 0, columnspan = 2, pady=10)
+
+        vote_img = Label(frame1)
+        vote_img.grid(row = 6, column = 0, columnspan = 2, pady=10)
+
+        sub = Button(frame1, text="view", width=10, command = lambda: view_vote(frame1, private_key.get(), voter_id, vm, vote_img))
+        sub.grid(row = 4, column = 0, columnspan = 2, pady=10)
+        
     # end modified
 
     client_socket.close()
