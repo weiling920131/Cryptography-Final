@@ -23,6 +23,7 @@ def view_vote(frame1, private_key, voter_id):
         Label(frame1, text="Vote:  " + RSA.decrypt_message(RSA.base64.b64decode(private_key), RSA.base64.b64decode(df.get_ciper(voter_id))), anchor="e", justify=LEFT).grid(row = 5,column = 0)
     except:
         Label(frame1, text="Your private key is incorrect", anchor="e", justify=LEFT).grid(row = 5,column = 0)
+        
 def failed_return(root,frame1,client_socket,message, voter_id = '10001'):
     for widget in frame1.winfo_children():
         widget.destroy()
