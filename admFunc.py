@@ -41,19 +41,19 @@ def showVotes(root,frame1):
 
 
     Label(frame1, text="whp1230:", font=('Helvetica', 12, 'bold')).grid(row = 2, column = 1)
-    Label(frame1, text=result['bjp'], font=('Helvetica', 12, 'bold')).grid(row = 2, column = 2)
+    Label(frame1, text=result['whp1230'], font=('Helvetica', 12, 'bold')).grid(row = 2, column = 2)
 
     Label(frame1, text="jox__sid:", font=('Helvetica', 12, 'bold')).grid(row = 3, column = 1)
-    Label(frame1, text=result['cong'], font=('Helvetica', 12, 'bold')).grid(row = 3, column = 2)
+    Label(frame1, text=result['jox__sid'], font=('Helvetica', 12, 'bold')).grid(row = 3, column = 2)
 
     Label(frame1, text="r14.07p:", font=('Helvetica', 12, 'bold')).grid(row = 4, column = 1)
-    Label(frame1, text=result['aap'], font=('Helvetica', 12, 'bold')).grid(row = 4, column = 2)
+    Label(frame1, text=result['r14.07p'], font=('Helvetica', 12, 'bold')).grid(row = 4, column = 2)
 
     Label(frame1, text="weiling_0131:", font=('Helvetica', 12, 'bold')).grid(row = 5, column = 1)
-    Label(frame1, text=result['ss'], font=('Helvetica', 12, 'bold')).grid(row = 5, column = 2)
+    Label(frame1, text=result['weiling_0131'], font=('Helvetica', 12, 'bold')).grid(row = 5, column = 2)
 
     Label(frame1, text="rueixsun:", font=('Helvetica', 12, 'bold')).grid(row = 6, column = 1)
-    Label(frame1, text=result['nota'], font=('Helvetica', 12, 'bold')).grid(row = 6, column = 2)
+    Label(frame1, text=result['rueixsun'], font=('Helvetica', 12, 'bold')).grid(row = 6, column = 2)
 
     frame1.pack()
     root.mainloop()
